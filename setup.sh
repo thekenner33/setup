@@ -32,11 +32,25 @@ cd $HOME
 if [ -d ./dotfiles/ ]; then
     mv dotfiles dotfiles.old
 fi
+if [ -f .bashrc ]; then
+    mv .bashrc bashrc.old
+fi
+
+ssh-keygen
+
+sudo apt-get update
+sudo apt-get install python-software-properties python g++ make
+sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs
+
+git clone https://github.com/thekenner33/bitstarter
 git clone https://github.com/thekenner33/nix-config
 mv nix-config .dotfiles
-./.dotfiles/install.sh
+cd .dotfiles
+./install.sh
 cd .dotfiles
 git submodule init
 git submodule update
 cd $HOME
-ex :BundleInstall
+ex -c BundleInstall
